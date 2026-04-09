@@ -5,16 +5,16 @@ let aiScore = 0;
 let lives = 3;
 
 let timeLeft;
-let timer;
-let aiTimer;
+let timer = null;
+let aiTimer = null;
 
 // Generate Question
 function generateQuestion() {
   const mode = document.getElementById("mode").value;
 
   if (mode === "easy") {
-    num1 = rand(0, 50);
-    num2 = rand(0, 50);
+    num1 = rand(0, 100);
+    num2 = rand(0, 100);
     correct = num1 + num2;
   }
 
@@ -37,8 +37,9 @@ function generateQuestion() {
   nextRound();
 }
 
-// Timer
+// Timer + Start
 function resetTimer() {
+  if (timer)
   clearInterval(timer);
 
   const mode = document.getElementById("mode").value;
@@ -64,6 +65,7 @@ function resetTimer() {
 
 // AI Logic
 function aiPlay() {
+  if(aiTimer)
   clearTimeout(aiTimer);
 
   const mode = document.getElementById("mode").value;
@@ -82,7 +84,7 @@ function aiPlay() {
 
   if (mode === "hard") {
     aiSpeed = rand(1000, 2500);
-    accuracy = 0.9;
+    accuracy = 50;
   }
 
   aiTimer = setTimeout(() => {
@@ -101,8 +103,19 @@ function aiPlay() {
   }, aiSpeed);
 }
 
+// Mode Change Fix 
+function changeMode() {
+  if (timer)
+    clearInterval(timer);
+  if (aiTimer);
+  clearTimeout(aiTimer);
+
+  generateQuestion();
+}
+
 // Player Answer
 function checkAnswer() {
+  if (aiTimer)
   clearTimeout(aiTimer);
 
   const user = Number(document.getElementById("answer").value);
@@ -150,7 +163,9 @@ function nextRound() {
 
 // Game Over
 function gameOver(msg) {
+  if (timer)
   clearInterval(timer);
+if (aiTimer)
   clearTimeout(aiTimer);
   alert(msg + " Final Score: " + score + " vs AI: " + aiScore);
   location.reload();
