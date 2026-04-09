@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>WildMath - AI Math Practice And Battle</title>
+<title>WildMath - AI Math Game</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description"
-content="WildMath is an Ai Powered Platform To Practoce MathWith Unlimited Questions,Difficulty Levels And Fun Challenges">
 
 <style>
 body {
@@ -93,14 +91,13 @@ select {
     🤖 AI: <span id="aiScore">0</span>
   </div>
 
-  <select id="mode"
-  onchange="changeMode()">
+  <select id="mode" onchange="changeMode()">
     <option value="easy">Easy</option>
     <option value="normal">Normal</option>
     <option value="hard">Hard</option>
   </select>
 
-  <div id="question">...</div>
+  <div id="question">Loading...</div>
 
   <input type="number" id="answer" placeholder="Answer">
   <br>
