@@ -37,10 +37,9 @@ function generateQuestion() {
   nextRound();
 }
 
-// Timer + Start
+// Timer
 function resetTimer() {
-  if (timer)
-  clearInterval(timer);
+  if (timer) clearInterval(timer);
 
   const mode = document.getElementById("mode").value;
 
@@ -65,8 +64,7 @@ function resetTimer() {
 
 // AI Logic
 function aiPlay() {
-  if(aiTimer)
-  clearTimeout(aiTimer);
+  if (aiTimer) clearTimeout(aiTimer);
 
   const mode = document.getElementById("mode").value;
 
@@ -84,7 +82,7 @@ function aiPlay() {
 
   if (mode === "hard") {
     aiSpeed = rand(1000, 2500);
-    accuracy = 50;
+    accuracy = 0.9; // FIXED
   }
 
   aiTimer = setTimeout(() => {
@@ -103,20 +101,17 @@ function aiPlay() {
   }, aiSpeed);
 }
 
-// Mode Change Fix 
+// Mode Change
 function changeMode() {
-  if (timer)
-    clearInterval(timer);
-  if (aiTimer);
-  clearTimeout(aiTimer);
+  if (timer) clearInterval(timer);
+  if (aiTimer) clearTimeout(aiTimer);
 
   generateQuestion();
 }
 
 // Player Answer
 function checkAnswer() {
-  if (aiTimer)
-  clearTimeout(aiTimer);
+  if (aiTimer) clearTimeout(aiTimer);
 
   const user = Number(document.getElementById("answer").value);
 
@@ -161,14 +156,16 @@ function nextRound() {
   aiPlay();
 }
 
-// Game Over
+// Game Over UI (improved)
 function gameOver(msg) {
-  if (timer)
-  clearInterval(timer);
-if (aiTimer)
-  clearTimeout(aiTimer);
-  alert(msg + " Final Score: " + score + " vs AI: " + aiScore);
-  location.reload();
+  if (timer) clearInterval(timer);
+  if (aiTimer) clearTimeout(aiTimer);
+
+  document.body.innerHTML = `
+    <h1>${msg}</h1>
+    <p>Score: ${score} | AI: ${aiScore}</p>
+    <button onclick="location.reload()">Play Again</button>
+  `;
 }
 
 // Helpers
@@ -193,12 +190,13 @@ function updateTimerUI() {
   }
 }
 
-// Enter key support
-document.getElementById("answer").addEventListener("keypress", function(e) {
-  if (e.key === "Enter") {
-    checkAnswer();
-  }
-});
+// Start after load
+window.onload = function () {
+  document.getElementById("answer").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      checkAnswer();
+    }
+  });
 
-// Start Game
-generateQuestion();
+  generateQuestion();
+};
