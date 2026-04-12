@@ -163,12 +163,7 @@ function gameOver(msg) {
 if (aiTimer)
   clearTimeout(aiTimer);
   alert(msg + " Final Score: " + score + " vs AI: " + aiScore);
-  if (window.Android) {
-    Android.showAd();
-  }
-  setTimeout(() => {
-    location.reload();
-  }, 1000);
+  location.reload();
 }
 
   document.body.innerHTML = `
