@@ -158,8 +158,18 @@ function nextRound() {
 
 // Game Over UI (improved)
 function gameOver(msg) {
-  if (timer) clearInterval(timer);
-  if (aiTimer) clearTimeout(aiTimer);
+  if (timer)
+  clearInterval(timer);
+if (aiTimer)
+  clearTimeout(aiTimer);
+  alert(msg + " Final Score: " + score + " vs AI: " + aiScore);
+  if (window.Android) {
+    Android.showAd();
+  }
+  setTimeout(() => {
+    location.reload();
+  }, 1000);
+}
 
   document.body.innerHTML = `
     <h1>${msg}</h1>
