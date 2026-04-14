@@ -92,6 +92,7 @@ function aiPlay() {
       aiScore++;
       document.getElementById("aiScore").innerText = aiScore;
       document.getElementById("result").innerText = "🤖 AI got it!";
+      document.getElementById("correctSound").play();
 
       if (aiScore >= 10) {
         gameOver("🤖 AI Wins!");
@@ -206,6 +207,7 @@ generateQuestion();
 
 const music = document.getElementById("bgMusic");
 const btn = document.getElementById("musicBtn");
+document.getElementById("correctSound").volume = 0.5;
 
 // First user interaction pe music start (mobile fix)
 document.addEventListener("click", () => {
