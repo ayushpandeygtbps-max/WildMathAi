@@ -125,7 +125,7 @@ function checkAnswer() {
     document.getElementById("score").innerText = score;
     document.getElementById("result").innerText = "✅ You got it!";
     
-document.getElementById("correctSound").play();
+  document.getElementById("correctSound").play();
     
     if (score >= 10) {
       gameOver("🏆 You Win!");
