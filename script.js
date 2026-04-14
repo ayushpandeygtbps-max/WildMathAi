@@ -202,3 +202,34 @@ document.getElementById("answer").addEventListener("keypress", function(e) {
 
 // Start Game
 generateQuestion();
+// 🎵 MUSIC CONTROL START
+
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicBtn");
+
+// First user interaction pe music start (mobile fix)
+document.addEventListener("click", () => {
+  if (music) {
+    music.play().catch(() => {});
+  }
+}, { once: true });
+
+// Default volume
+if (music) {
+  music.volume = 0.4;
+}
+
+// Toggle mute/unmute
+function toggleMusic() {
+  if (!music || !btn) return;
+
+  if (music.muted) {
+    music.muted = false;
+    btn.innerText = "🔊";
+  } else {
+    music.muted = true;
+    btn.innerText = "🔇";
+  }
+}
+
+// 🎵 MUSIC CONTROL END
